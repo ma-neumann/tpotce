@@ -183,7 +183,9 @@ echo "###            Feed data endlessly to attackers, bots and scanners."
 echo "###            Also runs a Denial of Service Honeypot (ddospot)."
 echo
 while true; do
+  if [ -z "${myTPOT_TYPE+x}" ]; then
   read -p "### Install Type? (h/s/l/i/m/t) " myTPOT_TYPE
+  fi 
   case "${myTPOT_TYPE}" in
     h|H)
       echo
@@ -238,6 +240,7 @@ if [ "${myTPOT_TYPE}" == "HIVE" ];
 	echo
 	echo "### T-Pot User Configuration ..."
 	echo
+	if [ -z "${myWEB_USER+x}" ]; then
 	# Asking for web user name
 	myWEB_USER=""
 	while [ 1 != 2 ];
@@ -257,7 +260,9 @@ if [ "${myTPOT_TYPE}" == "HIVE" ];
 	        echo
 	    fi
 	  done
+	fi
 
+	if [ -z "${myWEB_PW+x}" ]; then
 	# Asking for web user password
 	myWEB_PW="pass1"
 	myWEB_PW2="pass2"
@@ -295,6 +300,7 @@ if [ "${myTPOT_TYPE}" == "HIVE" ];
 	        fi
 	    fi
 	done
+	fi
 
 	# Write username and password to T-Pot config file
 	echo "### Creating base64 encoded htpasswd username and password for T-Pot config file: ${myTPOT_CONF_FILE}"
